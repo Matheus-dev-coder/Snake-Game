@@ -1,7 +1,7 @@
 const canvas = document.getElementById('baseGame');
 const ctx = canvas.getContext('2d');
 
-
+//criação do quadrado
 /**
 * @param {number} x -Posição X do canto superior esquerdo
 * @param {number} y -Posição Y do canto superior esquerdo
@@ -23,6 +23,11 @@ function desenharQuadrado(x, y, tamanho, cor){
 }
 
 
+//movimentação e criação da cobra e maça.(la ele)
+
+const maca = { x: 60, y: 60 };
+const raioMaca = 10;
+
 const snake = [
     {x: 250, y: 250},
     {x: 225, y: 250},
@@ -31,7 +36,6 @@ const snake = [
 
 let dx = 25;
 let dy = 0;
-const speed = 0;
 let rodando = true;
 let ultimoFrame = 0;
 const intervalo = 200;
@@ -44,17 +48,27 @@ function mover(moveCobra){
 
     ctx.clearRect(0,0, canvas.width, canvas.height);
     
-    snake[0].x += dx;
-    snake[0].y += dy;
-
     for (let i = snake.length -1; i > 0; i--){
         snake[i].x = snake[i-1].x;
         snake[i].y = snake[i-1].y;
     }
 
+     snake[0].x += dx;
+     snake[0].y += dy;
+
+    //cobra
     snake.forEach(parte => {
       desenharQuadrado(parte.x, parte.y, 25, 'green');
     }); 
+
+    //maça
+    ctx.beginPath();
+    ctx.arc(maca.x, maca.y, raioMaca, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff0000';
+    ctx.fill();
+    ctx.strokeStyle = '#2c3e50';
+    ctx.stroke();
+
 
    if (
     snake[0].x < 0 ||
@@ -70,4 +84,32 @@ function mover(moveCobra){
     requestAnimationFrame(mover)
 }
 requestAnimationFrame(mover)
+
+//movimentção com teclas:
+
+document.addEventListener("keydown", TeclasMovimentos)
+
+function teclasMovimentos(event){
+
+     if (event.key == "ArrowRight" && dx !== -25){
+           dx= 25;
+           dy= 0;
+     }
+
+     if (event.key == "ArrowLeft" && dx !== 25){
+          dx= -25;
+          dy= 0;
+     }
+
+     if (event.key == "ArrowUp" && dy !== 25){
+           dx= 0;
+           dy= -25;
+     }
+
+     if (event.key == "ArrowDown" && dy !== -25){
+           dx= 0;
+           dy= 25;
+     }
+     
+}
 
