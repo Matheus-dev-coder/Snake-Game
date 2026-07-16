@@ -1,3 +1,4 @@
+console.log("Scrpit carregado")
 const canvas = document.getElementById('baseGame');
 const ctx = canvas.getContext('2d');
 
@@ -25,7 +26,7 @@ function desenharQuadrado(x, y, tamanho, cor){
 
 //movimentação e criação da cobra e maça.(la ele)
 
-const maca = { x: 60, y: 60 };
+const maca = { x: 25, y: 25 };
 const raioMaca = 10;
 
 const snake = [
@@ -55,6 +56,9 @@ function mover(moveCobra){
 
      snake[0].x += dx;
      snake[0].y += dy;
+     console.log(snake[0].x, snake[0].y, dx, dy);
+
+    
 
     //cobra
     snake.forEach(parte => {
@@ -68,7 +72,16 @@ function mover(moveCobra){
     ctx.fill();
     ctx.strokeStyle = '#2c3e50';
     ctx.stroke();
+    
+    if (snake[0].x == maca.x && snake[0].y == maca.y){
+        gerarMaca();
+    }
 
+    snake.push({
+        [snake.length -1].x;
+        [snake.length-1].y
+        
+    });
 
    if (
     snake[0].x < 0 ||
@@ -87,9 +100,10 @@ requestAnimationFrame(mover)
 
 //movimentção com teclas:
 
-document.addEventListener("keydown", TeclasMovimentos)
+document.addEventListener("keydown", teclasMovimentos)
 
 function teclasMovimentos(event){
+    console.log("Antes",dx,dy);
 
      if (event.key == "ArrowRight" && dx !== -25){
            dx= 25;
@@ -110,6 +124,15 @@ function teclasMovimentos(event){
            dx= 0;
            dy= 25;
      }
-     
+     console.log("depois", dx,dy);
 }
 
+
+function gerarMaca(){
+    let novoXmaca = Math.floor (Math.random() * 24) * 25;
+    let novoYmaca = Math.floor (Math.random() * 24) * 25;
+
+    maca.x = novoXmaca;
+    maca.y = novoYmaca;
+    
+}
