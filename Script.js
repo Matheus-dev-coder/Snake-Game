@@ -4,8 +4,21 @@ const canvas = document.getElementById('baseGame');
 const scoreElemento = document.getElementById("score");
 const recordElemento = document.getElementById("record");
 const botaoReniciar = document.getElementById("reiniciar");
+const telaGameOver = document.getElementById("gameOver");
+const scoreFinal = document.getElementById("scoreFinal");
+const recordFinal = document.getElementById("recordeFinal");
 
-botaoReniciar.style.display = "none";
+const cabecaDireita = new Image();
+cabecaDireita.src = "img_jogo/cobraDireita.png";
+const cabecaEsquerda = new Image();
+cabecaEsquerda.src = "img_jogo/cobraEsquerda.png";
+const cabecaCima = new Image();
+cabecaCima.src = "img_jogo/cobraCima.png";
+const cabecaBaixo = new Image();
+cabecaBaixo.src = "img_jogo/cobraBaixo.png";
+
+
+
 botaoReniciar.addEventListener("click", reiniciarJogo);
 
 const ctx = canvas.getContext('2d');
@@ -46,6 +59,8 @@ const maca = {
 
 const raioMaca = 10;
 
+const imagemMaca = new Image();
+imagemMaca.src = "img_jogo/maça.png";
 
 const snake = [
     {x: 250, y: 250},
@@ -65,6 +80,8 @@ const intervalo = 200;
 let score = 0;
 
 let recorde = Number(localStorage.getItem("recorde")) || 0;
+
+let imagemCabeca = cabecaDireita;
 
 recordElemento.innerHTML = recorde;
 
@@ -102,32 +119,41 @@ function mover(moveCobra){
 
 
         // cobra
-        snake.forEach(parte => {
+        snake.forEach((parte, index) => {
 
-            desenharQuadrado(parte.x, parte.y, 25, 'green');
+          if (index === 0) {
 
-        });
+            ctx.drawImage(
+              imagemCabeca,
+              parte.x,
+              parte.y,
+              25,
+              25
+            );
+
+        } else {
+
+          desenharQuadrado(
+            parte.x,
+            parte.y,
+            25,
+            "green"
+        );
+
+    }
+
+});
 
 
 
         // maçã
-        ctx.beginPath();
-
-        ctx.arc(
-            maca.x, 
-            maca.y, 
-            raioMaca, 
-            0, 
-            Math.PI * 2
-        );
-
-        ctx.fillStyle = '#ff0000';
-
-        ctx.fill();
-
-        ctx.strokeStyle = '#2c3e50';
-
-        ctx.stroke();
+        ctx.drawImage(
+            imagemMaca,
+            maca.x,
+            maca.y,
+            25,
+            25
+       );
 
 
 
@@ -178,12 +204,13 @@ function mover(moveCobra){
 
                 rodando = false;
 
-                botaoReniciar.style.display = "block";
+                scoreFinal.innerHTML = score;
+                recordFinal.innerHTML = recorde;
 
-                console.log("Game Over");
+                telaGameOver.style.display = "flex";
 
-            }
-
+                   console.log("Game Over");
+                }
 
             if(
                 snake[0].x < 0 ||
@@ -192,13 +219,15 @@ function mover(moveCobra){
                 snake[0].y + 25 > canvas.height
             ){
 
-                rodando = false;
+               rodando = false;
 
-                botaoReniciar.style.display = "block";
+              scoreFinal.innerHTML = score;
+              recordFinal.innerHTML = recorde;
 
-                console.log("Game Over!");
+              telaGameOver.style.display = "flex";
 
-                return;
+              console.log("Game Over!");
+              return;
 
             }
 
@@ -233,6 +262,7 @@ function teclasMovimentos(event){
 
         dx = 25;
         dy = 0;
+        imagemCabeca = cabecaDireita;
 
     }
 
@@ -241,6 +271,7 @@ function teclasMovimentos(event){
 
         dx = -25;
         dy = 0;
+        imagemCabeca = cabecaEsquerda;
 
     }
 
@@ -249,6 +280,7 @@ function teclasMovimentos(event){
 
         dx = 0;
         dy = -25;
+        imagemCabeca = cabecaCima;
 
     }
 
@@ -257,6 +289,7 @@ function teclasMovimentos(event){
 
         dx = 0;
         dy = 25;
+        imagemCabeca = cabecaBaixo;
 
     }
 
@@ -344,7 +377,7 @@ function reiniciarJogo(){
 
     dy = 0;
 
-
+    imagemCabeca = cabecaDireita;
 
     rodando = true;
 
@@ -355,7 +388,7 @@ function reiniciarJogo(){
     gerarMaca();
 
 
-    botaoReniciar.style.display = "none";
+    telaGameOver.style.display = "none";
 
 
     requestAnimationFrame(mover);

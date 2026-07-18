@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+
+}
+h1{
+   text-align: center;
+   margin: 20px 0;
+   font-size: 36px;
+   font-weight: 800; 
+}
+.info{
+   display: flex;
+   text-align: center;
+   justify-content: space-between;
+   max-width: 600px;
+   margin: 20px auto;
+   padding: 15px;
+
+}
+canvas{
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+
+}
+
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    height: 180px;
+    border-radius: 0px 8px;
+    background-color: #0c570c;
+    box-shadow: 1px 0 6px 2px;
+}
+
+.perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.perfil h3{
+    margin:0;
+    font-size: 18px;
+}
+
+.perfil a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-size: 16px;
+}
+.perfil a:hover{
+    text-decoration: underline;
+}
+.perfil video{
+    box-shadow: 1px 3px 5px 1px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#gameOver{
+    position: absolute;
+
+    top: 49%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 600px;
+    height: 600px;
+    border-radius: 10px;
+
+    background: rgba(0,0,0,.8);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: white;
+    z-index: 1000;
+}
+#gameOver h1{
+    font-size:48px;
+}
+
+#gameOver button{
+
+    padding:15px 30px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2ecc71;
+
+    color:white;
+
+    transition:.3s;
+}
+
+#gameOver button:hover{
+
+    transform:scale(1.05);
+
+    background:#27ae60;
+
+}
+
+
+
+
+
