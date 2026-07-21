@@ -17,6 +17,18 @@ cabecaCima.src = "img_jogo/cobraCima.png";
 const cabecaBaixo = new Image();
 cabecaBaixo.src = "img_jogo/cobraBaixo.png";
 
+const caudaDireita = new Image();
+caudaDireita.src = "img_jogo/cobracaldaDireita.png";
+
+const caudaEsquerda = new Image();
+caudaEsquerda.src = "img_jogo/cobracaldaEsquerda.png";
+
+const caudaCima = new Image();
+caudaCima.src = "img_jogo/caldacobraCima.png";
+
+const caudaBaixo = new Image();
+caudaBaixo.src = "img_jogo/caldacobraBaixo.png";
+
 
 
 botaoReniciar.addEventListener("click", reiniciarJogo);
@@ -67,6 +79,9 @@ const snake = [
     {x: 225, y: 250},
     {x: 200, y: 250}
 ];
+
+const imagemCorpo = new Image();
+imagemCorpo.src = "img_jogo/corpo.png";
 
 
 let dx = 25;
@@ -131,13 +146,45 @@ function mover(moveCobra){
               25
             );
 
-        } else {
+        }
 
-          desenharQuadrado(
+        //cauda
+        else if (index === snake.length-1){
+
+            const anterior = snake[index - 1];
+
+            if(anterior.x < parte.x){
+                ctx.drawImage(
+                    caudaDireita,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+
+            }
+            else if (anterior.x > parte.x) {
+                ctx.drawImage(
+                    cabecaEsquerda,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+                   
+            }
+        }
+
+        
+
+        else {
+
+          ctx.drawImage(
+            imagemCorpo,
             parte.x,
             parte.y,
             25,
-            "green"
+            25
         );
 
     }
