@@ -35,8 +35,18 @@ imagemCorpoVertical.src = "img_jogo/cobracorpoCimaBaixo.png";
 const imagemCorpoHorizontal = new Image();
 imagemCorpoHorizontal.src = "img_jogo/cobracorpo.png";
 //mudar imgs
-const curvaDireita = new Image();
-curvaDireita.src = "img_jogo/cobracorpoCuravasEquerda.png";
+const curvaDireitaAlto = new Image();
+curvaDireitaAlto.src = "img_jogo/cobracorpoCurvaDireitaAlto.png";
+
+const curvaDireitaBaixo = new Image();
+curvaDireitaBaixo.src = "img_jogo/cobracorpoCurvaDireitaBaixo.png";
+
+//esquerda
+const curvaEsquerdaAlto = new Image();
+curvaEsquerdaAlto.src = "img_jogo/cobracorpoCurvaEsquerdaAlto.png";
+
+const curvaEsquerdaBaixo = new Image();
+curvaEsquerdaBaixo.src = "img_jogo/cobracorpoCurvaEsquerdaBaixo.png";
 
 
 
@@ -228,11 +238,47 @@ function mover(moveCobra){
                 );
            }
            else if(
-            (anterior.x < parte.x && proximo.x > parte.x) ||
-            (proximo.x <parte.x && anterior.y > parte.y)
+            (anterior.x < parte.x && proximo.y > parte.y) ||
+            (proximo.x < parte.x && anterior.y > parte.y)
            ){
                 ctx.drawImage(
-                    curvaDireita,
+                    curvaDireitaAlto,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+           }
+           else if(
+            (anterior.x < parte.x && proximo.y < parte.y) ||
+            (proximo.x < parte.x && anterior.y < parte.y)
+           ){
+                ctx.drawImage(
+                    curvaDireitaBaixo,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )           
+           }
+           else if (
+            (anterior.x > parte.x && proximo.y < parte.y) ||
+            (proximo.x > parte.x && anterior.y < parte.y)
+           ){
+                ctx.drawImage(
+                    curvaEsquerdaAlto,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+           }
+           else if (
+            (anterior.x > parte.x && proximo.y > parte.y) ||
+            (proximo.x > parte.x && anterior.y > parte.y)
+           ){
+                ctx.drawImage(
+                    curvaEsquerdaBaixo,
                     parte.x,
                     parte.y,
                     25,
@@ -242,6 +288,58 @@ function mover(moveCobra){
 
 
         }
+         else if(
+            (anterior.y < parte.y && proximo.x > parte.x) ||
+            (proximo.y < parte.y && anterior.x > parte.x)
+           ){
+                ctx.drawImage(
+                    curvaDireitaAlto,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+           }
+           else if(
+            (anterior.y< parte.y && proximo.x < parte.x) ||
+            (proximo.y < parte.y && anterior.x < parte.x)
+           ){
+                ctx.drawImage(
+                    curvaDireitaBaixo,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )           
+           }
+           else if (
+            (anterior.y > parte.y && proximo.x < parte.x) ||
+            (proximo.y > parte.y && anterior.x < parte.x)
+           ){
+                ctx.drawImage(
+                    curvaEsquerdaAlto,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+           }
+           else if (
+            (anterior.y > parte.y && proximo.x > parte.x) ||
+            (proximo.y > parte.y && anterior.x > parte.x)
+           ){
+                ctx.drawImage(
+                    curvaEsquerdaBaixo,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                )
+           }
+
+
+        }
+        
 
 });
 
