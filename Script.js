@@ -17,17 +17,26 @@ cabecaCima.src = "img_jogo/cobraCima.png";
 const cabecaBaixo = new Image();
 cabecaBaixo.src = "img_jogo/cobraBaixo.png";
 
-const caudaDireita = new Image();
-caudaDireita.src = "img_jogo/cobracaldaDireita.png";
+const caldaDireita = new Image();
+caldaDireita.src = "img_jogo/cobracaldaDireita.png";
 
-const caudaEsquerda = new Image();
-caudaEsquerda.src = "img_jogo/cobracaldaEsquerda.png";
+const caldaEsquerda = new Image();
+caldaEsquerda.src = "img_jogo/cobracaldaEsquerda.png";
 
-const caudaCima = new Image();
-caudaCima.src = "img_jogo/caldacobraCima.png";
+const caldaCima = new Image();
+caldaCima.src = "img_jogo/caldacobraCima.png";
 
-const caudaBaixo = new Image();
-caudaBaixo.src = "img_jogo/caldacobraBaixo.png";
+const caldaBaixo = new Image();
+caldaBaixo.src = "img_jogo/caldacobraBaixo.png";
+
+const imagemCorpoVertical = new Image();
+imagemCorpoVertical.src = "img_jogo/cobracorpoCimaBaixo.png";
+
+const imagemCorpoHorizontal = new Image();
+imagemCorpoHorizontal.src = "img_jogo/cobracorpo.png";
+//mudar imgs
+const curvaDireita = new Image();
+curvaDireita.src = "img_jogo/cobracorpoCuravasEquerda.png";
 
 
 
@@ -81,7 +90,7 @@ const snake = [
 ];
 
 const imagemCorpo = new Image();
-imagemCorpo.src = "img_jogo/corpo.png";
+imagemCorpo.src =  "img_jogo/cobracorpo.png";
 
 
 let dx = 25;
@@ -152,10 +161,11 @@ function mover(moveCobra){
         else if (index === snake.length-1){
 
             const anterior = snake[index - 1];
+            const proximo = snake[index + 1];
 
             if(anterior.x < parte.x){
                 ctx.drawImage(
-                    caudaDireita,
+                    caldaDireita,
                     parte.x,
                     parte.y,
                     25,
@@ -165,29 +175,73 @@ function mover(moveCobra){
             }
             else if (anterior.x > parte.x) {
                 ctx.drawImage(
-                    cabecaEsquerda,
+                    caldaEsquerda,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+                   
+            }
+            else if (anterior.y > parte.y){
+                ctx.drawImage(
+                    caldaBaixo,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+            }
+            else if (anterior.y < parte.y) {
+                ctx.drawImage(
+                    caldaCima,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+            }
+        }
+
+        
+        else {
+           const anterior = snake[index - 1];
+           const proximo = snake[index + 1];
+
+           if (anterior.y === parte.y && proximo.y === parte.y){
+                ctx.drawImage(
+                    imagemCorpoHorizontal,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+           }
+          
+           else if (anterior.x === parte.x && proximo.x === parte.x) {
+                ctx.drawImage(
+                    imagemCorpoVertical,
+                    parte.x,
+                    parte.y,
+                    25,
+                    25
+                );
+           }
+           else if(
+            (anterior.x < parte.x && proximo.x > parte.x) ||
+            (proximo.x <parte.x && anterior.y > parte.y)
+           ){
+                ctx.drawImage(
+                    curvaDireita,
                     parte.x,
                     parte.y,
                     25,
                     25
                 )
-                   
-            }
+           }
+
+
         }
-
-        
-
-        else {
-
-          ctx.drawImage(
-            imagemCorpo,
-            parte.x,
-            parte.y,
-            25,
-            25
-        );
-
-    }
 
 });
 
