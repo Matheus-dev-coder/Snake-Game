@@ -288,57 +288,7 @@ function mover(moveCobra){
 
 
         }
-         else if(
-            (anterior.y < parte.y && proximo.x > parte.x) ||
-            (proximo.y < parte.y && anterior.x > parte.x)
-           ){
-                ctx.drawImage(
-                    curvaDireitaAlto,
-                    parte.x,
-                    parte.y,
-                    25,
-                    25
-                )
-           }
-           else if(
-            (anterior.y< parte.y && proximo.x < parte.x) ||
-            (proximo.y < parte.y && anterior.x < parte.x)
-           ){
-                ctx.drawImage(
-                    curvaDireitaBaixo,
-                    parte.x,
-                    parte.y,
-                    25,
-                    25
-                )           
-           }
-           else if (
-            (anterior.y > parte.y && proximo.x < parte.x) ||
-            (proximo.y > parte.y && anterior.x < parte.x)
-           ){
-                ctx.drawImage(
-                    curvaEsquerdaAlto,
-                    parte.x,
-                    parte.y,
-                    25,
-                    25
-                )
-           }
-           else if (
-            (anterior.y > parte.y && proximo.x > parte.x) ||
-            (proximo.y > parte.y && anterior.x > parte.x)
-           ){
-                ctx.drawImage(
-                    curvaEsquerdaBaixo,
-                    parte.x,
-                    parte.y,
-                    25,
-                    25
-                )
-           }
-
-
-        }
+  
         
 
 });
